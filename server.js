@@ -2,9 +2,6 @@ const express = require("express");
 const path = require("path");
 const fs = require("fs");
 
-let apiRoutes = require("./routes/api");
-let htmlRoutes = require("./routes/html");
-
 let app = express();
 let PORT = 3080;
 
@@ -23,7 +20,7 @@ app.listen(PORT, () => {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(express.static("public"));
-  
+  // gets the information we need to display the proper page
   app.get("/api/config", (req, res) => {
       res.json("Route created");
   });
@@ -38,7 +35,7 @@ app.listen(PORT, () => {
           return res.json(JSON.parse(data));
       });
   });
-  
+  // post notes when directed
   app.post("/api/notes", (req, res) => {
       fs.readFile("./db/db.json", (err, data) => {
               if (err) throw err;
@@ -54,7 +51,7 @@ app.listen(PORT, () => {
       });
   });
   
-  
+  // delete notes when specified
   app.delete("/api/notes/:id", (req, res) => {
       fs.readFile("./db/db.json", (err, data) => {
           if (err) throw err;
