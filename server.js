@@ -63,7 +63,7 @@ app.listen(PORT, () => {
           console.log(newNotes);
               fs.writeFile("./db/db.json", JSON.stringify(newNotes), (err) => {
               if (err) throw err;
-              console.log("The file has been deleted!");
+              console.log("DELETED!");
               });
           res.end();
         });
